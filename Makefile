@@ -12,7 +12,10 @@ venv: $(VENV)/pyvenv.cfg
 install:
 	$(POETRY) install
 
-distclean:
+clean:
+	fd --hidden --no-ignore --type d .pytest_cache -x rm -fr {}
+
+distclean: clean
 	rm -fr $(VENV)
 
 test:
@@ -23,6 +26,7 @@ init: venv install
 .PHONY: \
 	venv \
 	install \
+	clean \
 	distclean \
 	test \
 	init
